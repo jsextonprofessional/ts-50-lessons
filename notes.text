@@ -4,23 +4,18 @@ TYPESCRIPT IN 50 LESSONS - NOTES
 ==========================
 CH1 - TS FOR SMASHING PPL
 ==========================
-------------------------------------
-LESSON 1: Red Squiggly Lines
-------------------------------------
+
+--- LESSON 1: Red Squiggly Lines ---
 
 //@ts-check at the top of  each .js file to enable typescript 
 
-------------------------------------
-LESSON 2: Hunting Bugs
-------------------------------------
+--- LESSON 2: Hunting Bugs ---
 
 - ctrl + space shows autocomplete suggestions in VSCode
 - "type inference": the moment we assign a value to a variable, TypeScript tries to infer the type from the assignment
 - "semantic checks": catch errors with misuse of var, let, const
 
-------------------------------------
-LESSON 3: Types
-------------------------------------
+--- LESSON 3: Types ---
 
 - "A type is a classification of data that defines the operations that can be done on that data, the meaning of the data, and the set of allowed values Typing is checked by the compiler and/or run time to ensure the integrity of the data, enforce access restrictions, and interpret the data as
 meant by the developer" - Vlad Riscutia
@@ -37,22 +32,27 @@ meant by the developer" - Vlad Riscutia
 - "Shapes" tell about structural features of a type 
 - TS is a structural type system
 
-------------------------------------
-LESSON 4: Adding Types with JSDoc
-------------------------------------
+--- LESSON 4: Adding Types with JSDoc ---
 
 not sure if useful for my purposes...
 
-------------------------------------
-LESSON 5: Type Declaration Files
-------------------------------------
+--- LESSON 5: Type Declaration Files ---
 
 .d.ts files add all your custom types but no extra program code
 
-------------------------------------
-LESSON 6: Ambient Declaration Files
-------------------------------------
+--- LESSON 6: Ambient Declaration Files ---
+--- LESSON 7: Tooling ---
 
-------------------------------------
-LESSON 7: Tooling 
-------------------------------------
+
+
+==========================
+CH2 - WORKING WITH TYPES
+==========================
+
+--- LESSON 8: Compiling Typescript ---
+--- LESSON 9: any, Are You OK? ---
+--- LESSON 10: Control Flow ---
+--- LESSON 11: Typing Objects ---
+--- LESSON 12: Object Type Tool Belt ---
+--- LESSON 13: Typing Classes ---
+--- LESSON 14: Interfaces ---
