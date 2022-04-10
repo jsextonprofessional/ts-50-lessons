@@ -1,0 +1,57 @@
+TYPESCRIPT IN 50 LESSONS - NOTES
+
+
+==========================
+CH1 - TS FOR SMASHING PPL
+==========================
+------------------------------------
+LESSON 1: Red Squiggly Lines
+------------------------------------
+
+//@ts-check at the top of  each .js file to enable typescript 
+
+------------------------------------
+LESSON 2: Hunting Bugs
+------------------------------------
+
+- ctrl + space shows autocomplete suggestions in VSCode
+- "type inference": the moment we assign a value to a variable, TypeScript tries to infer the type from the assignment
+- "semantic checks": catch errors with misuse of var, let, const
+
+------------------------------------
+LESSON 3: Types
+------------------------------------
+
+- "A type is a classification of data that defines the operations that can be done on that data, the meaning of the data, and the set of allowed values Typing is checked by the compiler and/or run time to ensure the integrity of the data, enforce access restrictions, and interpret the data as
+meant by the developer" - Vlad Riscutia
+- Primitives: 
+    -- number
+    -- string
+    -- boolean
+- Composite Data Types: 
+    -- objects - properties and values of different primitive and composite types
+    -- arrays - lists of values which can take any type
+    -- functions - methods you call with paramaters of certain types, and which return values of certain types
+- Symbols: ehhhrrr....idk yet
+- JS is weakly typed, TS is strongly typed
+- "Shapes" tell about structural features of a type 
+- TS is a structural type system
+
+------------------------------------
+LESSON 4: Adding Types with JSDoc
+------------------------------------
+
+------------------------------------
+LESSON 5: Type Declaration Files
+
+------------------------------------
+
+------------------------------------
+LESSON 6: Ambient Declaration Files
+
+------------------------------------
+
+------------------------------------
+LESSON 7: Tooling 
+
+------------------------------------
