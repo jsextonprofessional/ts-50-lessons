@@ -12,6 +12,8 @@ function addNumbers(numberOne, numberTwo) {
   return numberOne + numberTwo
 }
 
+// Typescript throws an error here, bc JSDoc comments expect two number, not a number and a string 
 addNumbers(3, '2')
 
+// TS throws an error here, bc addNumbers returns a number, and toUpperCase() is not available in number
 addNumbers(3, 2).toUppercase()

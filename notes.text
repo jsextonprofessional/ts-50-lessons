@@ -41,17 +41,18 @@ meant by the developer" - Vlad Riscutia
 LESSON 4: Adding Types with JSDoc
 ------------------------------------
 
-------------------------------------
-LESSON 5: Type Declaration Files
+not sure if useful for my purposes...
 
 ------------------------------------
+LESSON 5: Type Declaration Files
+------------------------------------
+
+.d.ts files add all your custom types but no extra program code
 
 ------------------------------------
 LESSON 6: Ambient Declaration Files
-
 ------------------------------------
 
 ------------------------------------
 LESSON 7: Tooling 
-
 ------------------------------------
