@@ -51,7 +51,18 @@ CH2 - WORKING WITH TYPES
 
 --- LESSON 8: Compiling Typescript ---
 --- LESSON 9: any, Are You OK? ---
+Left hand vs right hand typing -
+	Left hand typing happens explicitly on the left side of = sign;
+	Right hand typing happens once value is set on right side of = sign (type inference); 
 --- LESSON 10: Control Flow ---
+Typeguards
+Control Flow Analysis
+Narrowing Down
+subtypes and supertypes
+	Any is the supertype of all types and string is a subtype of any.
+	Every value of string can be assigned to supertype any, but not every value of any can be assigned to its subtype string.
+'unknown' - compatible with every type, thus it is a top type
+	where we are allowed to do everything with any, we aren't allowed to do anything with unknown
 --- LESSON 11: Typing Objects ---
 --- LESSON 12: Object Type Tool Belt ---
 --- LESSON 13: Typing Classes ---
