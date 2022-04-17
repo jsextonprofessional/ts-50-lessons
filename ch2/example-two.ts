@@ -99,12 +99,13 @@ console.log(myFavouriteAddress);
 console.log(`--------- LESSON 11 ------------`);
 
 // COMPOSITE TYPES
-type Article = { 
+
+export type Article = { 
 	title: string, 
 	price: number, 
 	vat: number, 
-	stock: number, 
-	description: string
+	stock?: number, 
+	description?: string
 }
 
 // const book: Article = {
@@ -223,3 +224,192 @@ console.log(createArticleElement(movie));
 // 	vat: 0.19,
 // 	rating: 5
 // }) // Boom! rating is one property too many
+
+// --------- LESSON 12 ------------
+console.log(`--------- LESSON 12 ------------`);
+
+// type Order = { 
+// 	articles: {
+// 		price: number, 
+// 		vat: number, 
+// 		title: number
+// 	}[], 
+// 	customer: {
+// 		name: string, 
+// 		address: { 
+// 			city: string, 
+// 			zip: string, 
+// 			street: string, 
+// 			number: string
+// 		},
+// 		dateOfBirth: Date 
+// 	}
+// }
+
+// OR
+
+// type ArticleStub = { 
+// 	price: number, 
+// 	vat: number, 
+// 	title: string
+// }
+
+// type Address = { 
+// 	city: string, 
+// 	zip: string, 
+// 	street: string, 
+// 	number: string,
+// }
+
+// type Customer = { 
+// 	name: string, 
+// 	address: Address, 
+// 	dateOfBirth: date
+// }
+
+// type Order = {
+// 	articles: ArticleStub[],
+// 	customer: Customer 
+// }
+
+// OR
+
+type Order = typeof defaultOrder
+
+const defaultOrder = { 
+	articles: [
+		{
+			price: 1200.50,
+			vat: 0.2,
+			title: 'Macbook Air Refurbished - 2013'
+		}, 
+		{
+			price: 9,
+			vat: 0,
+			title: 'I feel smashing subscription'
+		} 
+	],
+	customer: {
+		name: 'Fritz Furball', 
+		address: {
+			city: 'Smashing Hill', 
+			zip: '90210',
+			street: 'Whisker-ia Lane', 
+			number: '1337'
+		},
+		dateOfBirth: new Date(2006, 9, 1) 
+	}
+}
+
+function checkOrders(orders: Order[]) {
+	let valid = true;
+	for(let order of orders) {
+		valid = valid && order.articles.length > 0
+	}
+	return valid
+}
+
+function isArticleInStock(article: Article) {
+	// this check is necessary to make sure
+	// the optional property exists 
+	if(article.stock) {
+		return article.stock > 0 
+	}
+	return false
+}
+
+// --------- LESSON 13 ------------
+console.log(`--------- LESSON 13 ------------`);
+class Discount { 
+	isPercentage: boolean
+	amount: number
+
+	constructor(
+		isPercentage: boolean, 
+		amount: number) { 
+		this.isPercentage = isPercentage 
+		this.amount = amount
+	}
+
+	apply(article: Article) { 
+		if(this.isPercentage) {
+			article.price = article.price 
+				- (article.price * this.amount)
+		} else {
+			article.price = article.price - this.amount
+		} 
+	}
+}
+
+// A discount that shaves off 10 EUR
+let discount: Discount = new Discount(true, 0.2) 
+discount.apply({
+	price: 39,
+	vat: 0.2,
+	title: 'Form Design Patterns'
+})
+
+let allProductsTwentyBucks: Discount = {
+	isPercentage: false,
+	amount: 20,
+	apply(article) {
+		article.price = 20
+	}
+}
+
+type DiscountType = {
+	isPercentage: boolean,
+	amount: number,
+	apply(article: Article): void
+}
+
+let disco: DiscountType = new Discount(true, 0.2)
+
+/**
+* This class always gives 20 %, but only if 
+* the price is not higher than 40 EUR
+*/
+// class TwentyPercentDiscount extends Discount { 
+// 	// No special constructor
+// 	constructor() {
+// 		// But we call the super constructor of 
+// 		// Discount
+// 		super(true, 0.2)
+// 	}
+
+// 	apply(article: Article) { 
+// 		if(article.price <= 40) {
+// 			super.apply(article) 
+// 		}
+// 	} 
+// }
+
+// let disco1: Discount
+// 	= new TwentyPercentDiscount() // OK
+// let disco2: TwentyPercentDiscount
+// 	= new Discount(true, 0.3) // OK! Semantics changed!
+
+class TwentyPercentDiscount extends Discount { 
+	constructor() {
+		super(true, 0.2) 
+	}
+	
+	apply(article: Article) { 
+		if(this.isValidForDiscount(article)) {
+		super.apply(article) 
+		}
+	}
+
+	isValidForDiscount(article: Article) { 
+		return article.price <= 40
+	}
+}
+
+let disco1: Discount
+	= new TwentyPercentDiscount() // Still OK
+let disco2: TwentyPercentDiscount
+	= new Discount(true, 0.3) // Error - we miss the `isValidForDiscount` method
+
+console.log(Discount);
+console.log(disco1);
+console.log(disco2);

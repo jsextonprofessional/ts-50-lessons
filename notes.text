@@ -65,5 +65,6 @@ subtypes and supertypes
 	where we are allowed to do everything with any, we aren't allowed to do anything with unknown
 --- LESSON 11: Typing Objects ---
 --- LESSON 12: Object Type Tool Belt ---
+? after property's name declares that prop optional
 --- LESSON 13: Typing Classes ---
 --- LESSON 14: Interfaces ---

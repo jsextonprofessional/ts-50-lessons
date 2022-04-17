@@ -1,3 +1,20 @@
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
 function addVAT(price, vat) {
     if (vat === void 0) { vat = 0.2; }
     return price * (1 + vat);
@@ -173,3 +190,119 @@ console.log(createArticleElement(movie));
 // 	vat: 0.19,
 // 	rating: 5
 // }) // Boom! rating is one property too many
+// --------- LESSON 12 ------------
+console.log("--------- LESSON 12 ------------");
+var defaultOrder = {
+    articles: [
+        {
+            price: 1200.50,
+            vat: 0.2,
+            title: 'Macbook Air Refurbished - 2013'
+        },
+        {
+            price: 9,
+            vat: 0,
+            title: 'I feel smashing subscription'
+        }
+    ],
+    customer: {
+        name: 'Fritz Furball',
+        address: {
+            city: 'Smashing Hill',
+            zip: '90210',
+            street: 'Whisker-ia Lane',
+            number: '1337'
+        },
+        dateOfBirth: new Date(2006, 9, 1)
+    }
+};
+function checkOrders(orders) {
+    var valid = true;
+    for (var _i = 0, orders_1 = orders; _i < orders_1.length; _i++) {
+        var order = orders_1[_i];
+        valid = valid && order.articles.length > 0;
+    }
+    return valid;
+}
+function isArticleInStock(article) {
+    // this check is necessary to make sure
+    // the optional property exists 
+    if (article.stock) {
+        return article.stock > 0;
+    }
+    return false;
+}
+// --------- LESSON 13 ------------
+console.log("--------- LESSON 13 ------------");
+var Discount = /** @class */ (function () {
+    function Discount(isPercentage, amount) {
+        this.isPercentage = isPercentage;
+        this.amount = amount;
+    }
+    Discount.prototype.apply = function (article) {
+        if (this.isPercentage) {
+            article.price = article.price
+                - (article.price * this.amount);
+        }
+        else {
+            article.price = article.price - this.amount;
+        }
+    };
+    return Discount;
+}());
+// A discount that shaves off 10 EUR
+var discount = new Discount(true, 0.2);
+discount.apply({
+    price: 39,
+    vat: 0.2,
+    title: 'Form Design Patterns'
+});
+var allProductsTwentyBucks = {
+    isPercentage: false,
+    amount: 20,
+    apply: function (article) {
+        article.price = 20;
+    }
+};
+var disco = new Discount(true, 0.2);
+/**
+* This class always gives 20 %, but only if
+* the price is not higher than 40 EUR
+*/
+// class TwentyPercentDiscount extends Discount { 
+// 	// No special constructor
+// 	constructor() {
+// 		// But we call the super constructor of 
+// 		// Discount
+// 		super(true, 0.2)
+// 	}
+// 	apply(article: Article) { 
+// 		if(article.price <= 40) {
+// 			super.apply(article) 
+// 		}
+// 	} 
+// }
+// let disco1: Discount
+// 	= new TwentyPercentDiscount() // OK
+// let disco2: TwentyPercentDiscount
+// 	= new Discount(true, 0.3) // OK! Semantics changed!
+var TwentyPercentDiscount = /** @class */ (function (_super) {
+    __extends(TwentyPercentDiscount, _super);
+    function TwentyPercentDiscount() {
+        return _super.call(this, true, 0.2) || this;
+    }
+    TwentyPercentDiscount.prototype.apply = function (article) {
+        if (this.isValidForDiscount(article)) {
+            _super.prototype.apply.call(this, article);
+        }
+    };
+    TwentyPercentDiscount.prototype.isValidForDiscount = function (article) {
+        return article.price <= 40;
+    };
+    return TwentyPercentDiscount;
+}(Discount));
+var disco1 = new TwentyPercentDiscount(); // Still OK
+var disco2 = new Discount(true, 0.3); // Error - we miss the `isValidForDiscount` method
+console.log(Discount);
+console.log(disco1);
+console.log(disco2);
