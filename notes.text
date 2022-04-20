@@ -67,4 +67,9 @@ subtypes and supertypes
 --- LESSON 12: Object Type Tool Belt ---
 ? after property's name declares that prop optional
 --- LESSON 13: Typing Classes ---
+I need to dig deeper to understand classes
 --- LESSON 14: Interfaces ---
+Interfaces are strongly related to classes as they set the blueprint for a class
+"Implements" keyword
+Interfaces are almost indistinguishable from custom object types, save a few subtle differnces
+"declaration merging" TS combines multiply declared interfaces into one

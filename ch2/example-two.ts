@@ -413,3 +413,171 @@ let disco2: TwentyPercentDiscount
 console.log(Discount);
 console.log(disco1);
 console.log(disco2);
+
+// --------- LESSON 14 ------------
+console.log(`--------- LESSON 14 ------------`);
+
+// Our Article type
+type Article = { 
+	title: string, 
+	price: number,
+	vat: number, 
+	stock?: number, 
+	description?: string
+}
+// Our friend’s ShopItem
+interface ShopItem { 
+	title: string; 
+	price: number;
+	vat: number;
+	stock?: number; 
+	description?: string;
+} // And yes, the semicolons are optional
+
+const discount = new Discount(true, 0.2)
+const shopItem: ShopItem = {
+	title: 'Inclusive components',
+	price: 30,
+	vat: 0.2
+}
+// Discount.apply is typed to take `Article`
+// but also takes a `ShopItem` 
+discount.apply(shopItem)
+console.log(shopItem, Discount);
+
+
+// Implementing Interfaces
+class DVD implements ShopItem { 
+	title: string
+	price: number
+	vat: number 
+	constructor(title: string) {
+	this.title = title
+	this.price = 9.99
+	this.vat = 0.2
+	} 
+}
+// Implementing Types
+class Book implements Article { 
+	title: string
+	price: number
+	vat: number
+	
+	constructor(title: string) { 
+		this.title = title
+		this.price = 39
+		this.vat = 0.2
+	} 
+}
+
+// Nope, we missed the property `title`!
+// class Book implements Article { 
+// 	price: number
+// 	vat: number
+
+// 	constructor() { 
+// 		this.price = 39 
+// 		this.vat = 0.2
+// 	} 
+// }
+
+let book = new Book('Art Direction on the Web')
+discount.apply(book)
+console.log(book, discount);
+
+
+let dvd = new DVD('Contagion')
+discount.apply(dvd)
+console.log(dvd, discount);
+
+interface ShopItem { 
+	reviews: {
+		rating: number,
+		content: string 
+	}[]
+}
+
+declare global { 
+	interface Window {
+		isDevelopment: boolean 
+	}
+}
+
+class Discount { 
+	...
+	apply(article: Article) { 
+		...
+		// Here we check if we are in dev mode
+		if(window.isDevelopment) { 
+			console.log('Another discount applied')
+		}
+	}
+}
+
+// --------- POST-14 INTERLUDE ------------
+console.log(`--------- POST-14 INTERLUDE ------------`);
+
+// // PROPERTY ACCESS MODIFIERS
+// class Article {
+// 	public title: string // << access modifier
+// 	private price: number // << access modifier
+	
+// 	constructor(title: string, price: number) { 
+// 		this.title = title
+// 		this.price = price
+// 	} 
+// }
+
+// const article
+// 	= new Article('Smashing Book 6', 39)
+
+// console.log(article.price)
+
+// class Article {
+// 	#price: number
+
+// 	constructor(price: number) {
+// 		this.#price = price
+// 	}
+// }
+
+// class Article {
+// 	// This constructor sets properties 
+// 	// automatically
+	
+// 	constructor(private price: number) { 
+// 		// Nothing to do here, this.price is 
+// 		// still available
+// 	} 
+// }
+
+// // ABSTRACT CLASSES
+// // something in between classes' and interfaces' implementations
+// abstract class Discount {
+// 	// This needs to be implemented
+// 	abstract isValid(article: Article): boolean;
+
+// 	// This is already implemented
+// 	apply(article: Article) { 
+// 		// Like before ...
+// 	} 
+// }
+
+// // ENUMS
+// // "enumerations" allow you to bundle type and use them throughout your code
+// enum UserType { 
+// 	Admin,
+// 	PayingCustomer,
+// 	Trial
+// }
+
+// function showWarning(user: UserType) { 
+// 	switch(user) {
+// 		case UserType.Admin:
+// 			return false;
+// 		case UserType.PayingCustomer:
+// 			return false;
+// 		case UserType.Trial:
+// 			return false;
+// 	}
+// }

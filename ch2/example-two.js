@@ -306,3 +306,47 @@ var disco2 = new Discount(true, 0.3); // Error - we miss the `isValidForDiscount
 console.log(Discount);
 console.log(disco1);
 console.log(disco2);
+// --------- LESSON 14 ------------
+console.log("--------- LESSON 14 ------------");
+var discount = new Discount(true, 0.2);
+var shopItem = {
+    title: 'Inclusive components',
+    price: 30,
+    vat: 0.2
+};
+// Discount.apply is typed to take `Article`
+// but also takes a `ShopItem` 
+discount.apply(shopItem);
+console.log(shopItem, Discount);
+// Implementing Interfaces
+var DVD = /** @class */ (function () {
+    function DVD(title) {
+        this.title = title;
+        this.price = 9.99;
+        this.vat = 0.2;
+    }
+    return DVD;
+}());
+// Implementing Types
+var Book = /** @class */ (function () {
+    function Book(title) {
+        this.title = title;
+        this.price = 39;
+        this.vat = 0.2;
+    }
+    return Book;
+}());
+// Nope, we missed the property `title`!
+var Book = /** @class */ (function () {
+    function Book() {
+        this.price = 39;
+        this.vat = 0.2;
+    }
+    return Book;
+}());
+var book = new Book('Art Direction on the Web');
+discount.apply(book);
+console.log(book, discount);
+var dvd = new DVD('Contagion');
+discount.apply(dvd);
+console.log(dvd, discount);
