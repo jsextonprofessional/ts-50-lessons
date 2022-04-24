@@ -1,25 +1,40 @@
-// TYPING FUNCTION HEADS
+// function search( 
+// 	query: string, 
+// 	tags?: string[]
+// ): Promise<Result[]> {
+// 	let queryString = `?query=${query}` 
+// 	if(tags && tags.length) {
+// 		queryString += `&tags=${tags.join()}` 
+// 	}
+// 	return fetch(`/search${queryString}`) 
+// 		.then(response => response.json())
+// 	}
 
-// A helper type with the results we expect 
-// from calling the back end
-type Result = {
-	title: string, 
-	url: string, 
-	abstract: string
+// type SearchFn = typeof search
+
+// search()
+
+type Query = {
+	query: string,
+	tags?: string[],
+	assemble: (includeTags: boolean) => string
 }
 
-/**
-* The search function takes a query it sends 
-* to the back end, as well as a couple of tags 
-* as a string array, to get filtered results 
-*/
-declare function search( 
-	query: string,
-	tags: string[]
-): Result[]
+const query: Query = {
+	query: 'Ember',
+	tags: ['javascript'],
+	assemble(includeTags = false) {
+		let query = `?query=${this.query}`
+		if(includeTags && typeof this.tags !== 'undefined') {
+			query += `&${this.tags.join(',')}`
+		}
+		return query
+	}
+}
 
-// OPTIONAL PARAMETERS
-
-search('Ember', ['Javascript']) // works
-search('Ember') // errors - tags are missing
-search('Ember', []) // nasty workaround
+type AssembleFn = (includeTags: boolean) => string 
+type Query = {
+	query: string, 
+	tags?: string[], 
+	assemble: AssembleFn
+}
